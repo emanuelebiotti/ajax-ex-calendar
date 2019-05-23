@@ -1,0 +1,11 @@
+.container {
+  width:1000px;
+  height:100vh;
+  border:1px solid black;
+  margin:0 auto;
+  display:Flex;
+  justify-content: center;
+}
+.calendario h1 {
+  text-align: center;
+}
