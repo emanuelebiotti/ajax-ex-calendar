@@ -1,25 +1,68 @@
 $(document).ready(function(){
 
-var mese = 1;
-var data = "2018-" + mese + "-01";
+var mese = ('0'+1);
+var data;
+var moment_data;
+var giorni;
 
-var moment_data = moment(data);
-var giorni = moment_data.daysInMonth();
-// console.log(giorni);
+stampamese();
+
+// var data = "2018-" + mese + "-01";
+//
+// var moment_data = moment(data);
+// var giorni = moment_data.daysInMonth();
+// // console.log(giorni);
+//
+//
+// $('.mesecorrente').text(moment_data.format('MMMM') + ' ' + moment_data.format('YYYY'));
+//
+// for (var i = 0; i < giorni; i++) {
+//
+//   $('.mese ul').append('<li>' + parseInt(i+1) + ' ' + moment_data.format('MMMM') + '</li>')
+//
+// }
+
+$.ajax({
+  'url': 'https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0',
+  'method': 'GET',
+  'data': {
+    'year': '2018',
+    'month': '0'
+  },
+  'success': function(data){
+
+    for (var k = 0; k < data.response.length; k++){
+      for (j = 0; j < giorni; j++){
+
+        if($('li').eq(j).attr('data-giorno') == data.response[k].date){
+          $('.mese ul').children().append(data.response[k].name);
+        }
+        console.log($('li').eq(j).attr('data-giorno'));
+        console.log(data.response[k].date);
+      }
+      // if(moment_data.format('YYYY-MM-DD') == data.response[k].date){
+      //   $('.mese ul').children().append(data.response[k].name);
+      //
+      // }
+    }
 
 
-$('.mesecorrente').text(moment_data.format('MMMM') + ' ' + moment_data.format('YYYY'))
+  },
+  'error': function() {
+    alert('errore');
+  }
+});
 
-for (var i = 0; i < giorni; i++) {
-
-  $('.mese').append('<li>' + parseInt(i+1) + ' ' + moment_data.format('MMMM') + '</li>')
-}
 
 $('.successivo').click(function(){
 
-  mese = mese+1;
+  mese = parseInt(mese)+1;
 
-  if (mese <= 12) {
+  if (mese < 10) {
+    mese = '0' + mese;
+  };
+
+  if (parseInt(mese) <= 12) {
 
     stampamese();
 
@@ -31,9 +74,13 @@ $('.successivo').click(function(){
 
 $('.precedente').click(function(){
 
-  mese = mese-1;
+  mese = parseInt(mese)-1;
 
-  if (mese >= 1) {
+  if (mese < 10) {
+    mese = '0' + mese;
+  };
+
+  if (parseInt(mese) >= 1) {
 
     stampamese();
 
@@ -45,20 +92,22 @@ $('.precedente').click(function(){
 
 
 function stampamese() {
-  $('.mese').html('');
+  $('.mese ul').html('');
 
   data = "2018-" + mese + "-01";
 
-  var moment_data = moment(data);
-  var giorni = moment_data.daysInMonth();
-  console.log(giorni);
+  moment_data = moment(data);
+  giorni = moment_data.daysInMonth();
 
 
   $('.mesecorrente').text(moment_data.format('MMMM') + ' ' + moment_data.format('YYYY'))
 
   for (var i = 0; i < giorni; i++) {
-
-  $('.mese').append('<li>' + parseInt(i+1) + ' ' + moment_data.format('MMMM') + '</li>')
+    var giornocorrente = parseInt(i+1);
+    if (giornocorrente < 10) {
+      giornocorrente = '0' + giornocorrente;
+    }
+  $('.mese ul').append('<li data-giorno="2018-' + mese + '-' + giornocorrente +'">' + parseInt(i+1) + ' ' + moment_data.format('MMMM') + '</li>')
   }
 }
 
