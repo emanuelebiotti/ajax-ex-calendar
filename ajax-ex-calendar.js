@@ -35,7 +35,7 @@ $.ajax({
       for (j = 0; j < giorni; j++){
 
         if($('li').eq(j).attr('data-giorno') == data.response[k].date){
-          $('.mese ul').children().append(data.response[k].name);
+          $('.mese ul li').eq(j).append(' ' + data.response[k].name);
         }
         console.log($('li').eq(j).attr('data-giorno'));
         console.log(data.response[k].date);
