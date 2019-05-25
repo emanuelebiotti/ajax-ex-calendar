@@ -6,11 +6,17 @@
   display:flex;
   flex-direction: column;
   align-items: center;
+  background-color: #08BAB5;
+  overflow: auto;
 }
 .navigator {
   width: 310px;
   display:flex;
   justify-content: space-between;
+}
+#mesecorrente {
+  font-size: 50px;
+  color:white;
 }
 button {
   width:150px;
@@ -19,4 +25,14 @@ button {
   border-radius: 5px;
   font-family: sans-serif;
   font-size: 15px;
+}
+ button:hover {
+   cursor: pointer;
+ }
+ul {
+  list-style-type: none;
+}
+ul li {
+  font-size: 30px;
+  color:white;
 }
