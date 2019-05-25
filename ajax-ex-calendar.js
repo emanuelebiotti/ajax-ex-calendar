@@ -122,8 +122,6 @@ function stampamese() {
       for (var k = 0; k < data.response.length; k++){
         for (j = 0; j < giorni; j++){
 
-          var festa = moment(data.response[k].date);
-          console.log(festa);
 
           if($('li').eq(j).attr('data-giorno') == data.response[k].date){
             $('.mese ul li').eq(j).append(' ' + data.response[k].name);
