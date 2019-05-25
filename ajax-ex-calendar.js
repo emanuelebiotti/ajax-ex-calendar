@@ -22,36 +22,36 @@ stampamese();
 //
 // }
 
-$.ajax({
-  'url': 'https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0',
-  'method': 'GET',
-  'data': {
-    'year': '2018',
-    'month': '0'
-  },
-  'success': function(data){
-
-    for (var k = 0; k < data.response.length; k++){
-      for (j = 0; j < giorni; j++){
-
-        if($('li').eq(j).attr('data-giorno') == data.response[k].date){
-          $('.mese ul li').eq(j).append(' ' + data.response[k].name);
-        }
-        console.log($('li').eq(j).attr('data-giorno'));
-        console.log(data.response[k].date);
-      }
-      // if(moment_data.format('YYYY-MM-DD') == data.response[k].date){
-      //   $('.mese ul').children().append(data.response[k].name);
-      //
-      // }
-    }
-
-
-  },
-  'error': function() {
-    alert('errore');
-  }
-});
+// $.ajax({
+//   'url': 'https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0',
+//   'method': 'GET',
+//   'data': {
+//     'year': '2018',
+//     'month': '0'
+//   },
+//   'success': function(data){
+//
+//     for (var k = 0; k < data.response.length; k++){
+//       for (j = 0; j < giorni; j++){
+//
+//         if($('li').eq(j).attr('data-giorno') == data.response[k].date){
+//           $('.mese ul li').eq(j).append(' ' + data.response[k].name);
+//         }
+//         console.log($('li').eq(j).attr('data-giorno'));
+//         console.log(data.response[k].date);
+//       }
+//       // if(moment_data.format('YYYY-MM-DD') == data.response[k].date){
+//       //   $('.mese ul').children().append(data.response[k].name);
+//       //
+//       // }
+//     }
+//
+//
+//   },
+//   'error': function() {
+//     alert('errore');
+//   }
+// });
 
 
 $('.successivo').click(function(){
@@ -109,6 +109,38 @@ function stampamese() {
     }
   $('.mese ul').append('<li data-giorno="2018-' + mese + '-' + giornocorrente +'">' + parseInt(i+1) + ' ' + moment_data.format('MMMM') + '</li>')
   }
+
+  $.ajax({
+    'url': 'https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0',
+    'method': 'GET',
+    'data': {
+      'year': '2018',
+      'month': '0'
+    },
+    'success': function(data){
+
+      for (var k = 0; k < data.response.length; k++){
+        for (j = 0; j < giorni; j++){
+
+          if($('li').eq(j).attr('data-giorno') == data.response[k].date){
+            $('.mese ul li').eq(j).append(' ' + data.response[k].name);
+          }
+          console.log($('li').eq(j).attr('data-giorno'));
+          console.log(data.response[k].date);
+        }
+        // if(moment_data.format('YYYY-MM-DD') == data.response[k].date){
+        //   $('.mese ul').children().append(data.response[k].name);
+        //
+        // }
+      }
+
+
+    },
+    'error': function() {
+      alert('errore');
+    }
+  });
+
 }
 
 
