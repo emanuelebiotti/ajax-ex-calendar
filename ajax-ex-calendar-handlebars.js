@@ -30,8 +30,23 @@ $('#succ').click(function(){
     disegna_mese(current_date);
   };
 
-
 });
+
+ // vado a intercettare il click sul mese precedente
+ $('#prec').click(function(){
+   console.log(current_date.format('MMMM'));
+   // mi assicuro che non si vada prima di gennaio 2018
+   if (current_date.isSameOrBefore(min_date)) {
+     alert('oltre la data!');
+   } else {
+     // faccio scorrere il calendario al mese precedente
+     current_date.subtract(1, 'months');
+     // richiamando la funzione che disegna il mese, che ora sarà il successivo
+     disegna_mese(current_date);
+   };
+
+ });
+
 
 // qui imposto la funzione che dovro usare per stampare ogni mese
 
