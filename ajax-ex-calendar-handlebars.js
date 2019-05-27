@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-
 var template_html = $("#template_giorno").html();
 var template_function = Handlebars.compile(template_html);
 
@@ -19,7 +18,7 @@ disegna_mese(current_date);
 
 //vado a intercetare il click sul mese successivo
 $('#succ').click(function(){
-  console.log(current_date.format('MMMM'));
+  // console.log(current_date.format('MMMM'));
   // mi assicuro che non si vada oltre dicembre 2018
   if (current_date.isSameOrAfter(max_date)) {
     alert('oltre la data!');
@@ -34,7 +33,7 @@ $('#succ').click(function(){
 
  // vado a intercettare il click sul mese precedente
  $('#prec').click(function(){
-   console.log(current_date.format('MMMM'));
+   // console.log(current_date.format('MMMM'));
    // mi assicuro che non si vada prima di gennaio 2018
    if (current_date.isSameOrBefore(min_date)) {
      alert('oltre la data!');
@@ -60,6 +59,8 @@ function disegna_mese(moment_date) {
   // imposto il formato di come vorrò vedere scritti il mese e l'anno
   var mese = moment_date.format('MMMM');
   var anno = moment_date.format('YYYY');
+  var mesenumero = moment_date.format('M');
+  console.log(mesenumero);
 
   //inserisco nel titolo del mese il mese corrente e l'anno
   $('#mesecorrente').text(mese + ' ' + anno);
@@ -78,20 +79,21 @@ function disegna_mese(moment_date) {
 
     // inserisco il calendario con il numero di giorni corrispondenti al mese selezionato
     $('#calendario').append(template_function(variables));
+    // assegno a ogni giorno del mese un data numerico
     $('#template_giorno li').append('data-giorno', i);
   }
 
   // chiamata ajax
+
 
   $.ajax({
     'url': 'https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0',
     'method': 'GET',
     'data': {
       'year': '2018',
-      'month': '0'
+      'month': current_date.month()
     },
     'success': function(data){
-
 
       for (var k = 0; k < data.response.length; k++){
         for (j = 0; j < giorni; j++){
@@ -110,7 +112,6 @@ function disegna_mese(moment_date) {
 
 
 }
-
 
 
 
